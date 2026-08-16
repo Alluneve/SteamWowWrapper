@@ -10,7 +10,12 @@ internal static class BattleNet
 
         if (process is null)
         {
-            Process.Start(path);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = path,
+                Arguments = "--autostarted",
+                UseShellExecute = true
+            });
 
             process = await ProcessHelper.WaitForProcessAsync(
                 "Battle.net",
