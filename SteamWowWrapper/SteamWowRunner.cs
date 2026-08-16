@@ -7,6 +7,8 @@ internal static class SteamWowRunner
     public static async Task RunAsync(string battleNetPath)
     {
         using var self = Process.GetCurrentProcess();
+        using var shutdownArmed =
+            Watchdog.CreateShutdownSignal(self.Id);
 
         Watchdog.Start(self.Id);
 
@@ -14,10 +16,17 @@ internal static class SteamWowRunner
             return;
 
         using var wow = await WoW.LaunchAsync(battleNetPath);
+
         if (wow is null)
             return;
-        await wow.WaitForExitAsync();
 
+        // From this point, Steam Stop should close WoW + Battle.net.
+        shutdownArmed.Set();
+
+        await wow.WaitForExitAsync();
         await BattleNet.StopAsync();
+
+        // Normal WoW exit: watchdog no longer needs to clean anything up.
+        shutdownArmed.Reset();
     }
 }
