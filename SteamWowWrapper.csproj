@@ -7,7 +7,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Copyright>Copyleft Alluneve</Copyright>
         <Nullable>enable</Nullable>
-        <Version>0.0.2</Version>
+        <Version>0.0.4</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
