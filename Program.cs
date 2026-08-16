@@ -6,6 +6,11 @@ if (args is ["--watchdog", var pid])
     return;
 }
 
+Logger.Initialize();
+
+Logger.Debug(
+    $"Args ({args.Length}): [{string.Join("] [", args)}]");
+
 string? battleNetPath = args switch
 {
     ["--bnet", var path] => path,

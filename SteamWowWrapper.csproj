@@ -7,13 +7,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Copyright>Copyleft Alluneve</Copyright>
         <Nullable>enable</Nullable>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <DebugType>full</DebugType>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <DebugType>pdbonly</DebugType>
     </PropertyGroup>
 

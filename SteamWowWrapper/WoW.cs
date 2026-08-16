@@ -36,7 +36,7 @@ internal static class WoW
         if (wow is null || wow.HasExited)
             return;
 
-        Console.WriteLine("Requesting graceful WoW shutdown...");
+        Logger.Debug("Requesting graceful WoW shutdown...");
 
         wow.CloseMainWindow();
 
@@ -44,11 +44,11 @@ internal static class WoW
                 wow,
                 TimeSpan.FromSeconds(30)))
         {
-            Console.WriteLine("WoW exited gracefully.");
+            Logger.Info("WoW exited gracefully.");
             return;
         }
 
-        Console.WriteLine("WoW did not exit after 30 seconds. Forcing shutdown.");
+        Logger.Error("WoW did not exit after 30 seconds. Forcing shutdown.");
 
         wow.Kill(entireProcessTree: true);
         await wow.WaitForExitAsync();
